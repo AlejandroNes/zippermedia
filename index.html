@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zipper Media | Portafolio Profesional</title>
+    <style>
+        :root {
+            --bg-body: #08040f;
+            --bg-card: #120922;
+            --bg-card-inner: #1a0f2e;
+            --primary: #8b5cf6;
+            --primary-hover: #a78bfa;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --success: rgba(34, 197, 94, 0.15);
+            --success-text: #4ade80;
+            --warning: rgba(234, 179, 8, 0.15);
+            --warning-text: #fde047;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --tag-bg: rgba(139, 92, 246, 0.1);
+            --font-serif: 'Poppins', sans-serif;
+            --font-sans: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: radial-gradient(circle at top, #1c0d38 0%, var(--bg-body) 70%);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* HEADER & NAV */
+        header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.2) contrast(1.1);
+            display: block;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-hover);
+        }
+
+        .btn-nav {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary-hover) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            color: #fff !important;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 3.5rem 2rem 3rem;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* GRID */
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem 6rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.2rem;
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(18,9,34,0.5) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.8);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(139, 92, 246, 0.25);
+        }
+
+        /* BADGES */
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        .status-completed { background: var(--success); color: var(--success-text); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .status-progress { background: var(--warning); color: var(--warning-text); border: 1px solid rgba(234, 179, 8, 0.3); }
+
+        /* MOCKUP & IMÁGENES LOCALES */
+        .card-image-container {
+            background: var(--bg-card-inner);
+            height: 220px;
+            padding: 1.2rem 1.2rem 0 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image-container a { display: block; width: 100%; height: 100%; }
+
+        .mockup {
+            background: #0f172a;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-bottom: none;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .card-image-container:hover .mockup { transform: scale(1.02); }
+
+        .mockup-header {
+            background: #090d16;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        .mockup-header span { width: 8px; height: 8px; border-radius: 50%; }
+        .mockup-header span:nth-child(1) { background: #ef4444; }
+        .mockup-header span:nth-child(2) { background: #eab308; }
+        .mockup-header span:nth-child(3) { background: #22c55e; }
+
+        .mockup-body {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            background: #1e293b;
+            overflow: hidden;
+        }
+
+        .mockup-body img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        /* CONTENIDO DE TARJETA */
+        .card-content {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .category {
+            font-size: 0.7rem;
+            color: var(--primary-hover);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        /* ETIQUETAS */
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.2rem;
+        }
+
+        .tag {
+            font-size: 0.72rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--tag-bg);
+            border-radius: 6px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            color: #d8b4fe;
+            font-weight: 500;
+        }
+
+        /* SECCIONES: SOBRE NOSOTROS Y CTA */
+        .about-us, .cta-section {
+            max-width: 850px;
+            margin: 4rem auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(26, 15, 46, 0.4);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .about-us::before, .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .about-us h2, .cta-section h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .about-us p, .cta-section p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .btn-action-large {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #6d28d9);
+            color: #fff;
+            padding: 1.2rem 3.5rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px var(--primary-glow);
+        }
+
+        .btn-action-large:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.6);
+            color: #fff;
+        }
+
+        /* FOOTER */
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 56px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.2) contrast(1.1);
+            display: block;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--primary-glow);
+        }
+
+        .btn-action:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: 1fr; padding: 0 1rem 4rem; }
+            .hero h1 { font-size: 2.3rem; }
+            header { flex-direction: column; gap: 1rem; padding-bottom: 1rem; }
+            .main-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .about-us, .cta-section { margin: 2rem 1rem; padding: 3rem 1.5rem; }
+            .about-us h2, .cta-section h2 { font-size: 2rem; }
+        }
+
+        /* --- PREMIUM OVERRIDE --- */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #030108;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+        }
+        
+        header { border-bottom: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; background: rgba(3,1,8,0.7); }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 4rem auto;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .abstract-shape {
+            position: relative;
+            width: 320px;
+            height: 420px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glass-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,255,255,0.05);
+            z-index: 10;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg);
+            animation: shine 8s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        .orb-1 {
+            width: 250px; height: 250px;
+            background: #8b5cf6;
+            top: -40px; right: -60px;
+        }
+        .orb-2 {
+            width: 200px; height: 200px;
+            background: #3b82f6;
+            bottom: -30px; left: -40px;
+            animation-delay: 2s;
+        }
+        .orb-3 {
+            width: 150px; height: 150px;
+            background: #ec4899;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        .code-lines .line {
+            height: 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .w-75 { width: 75%; }
+        .w-50 { width: 50%; }
+        .w-100 { width: 100%; }
+        .w-25 { width: 25%; }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #6d28d9);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px var(--primary-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.6);
+            color: #fff;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            color: #fff;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            color: #d8b4fe;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Mejora a las tarjetas */
+        .card {
+            background: rgba(20, 10, 40, 0.4) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05) !important;
+        }
+        .card:hover {
+            border-color: rgba(139, 92, 246, 0.6) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 40px rgba(139,92,246,0.2) !important;
+        }
+        
+        
+        
+        /* --- BLOQUES RESTAURADOS --- */
+        .about-us-triplet {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+        .triplet-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .triplet-card {
+            background: rgba(20, 10, 40, 0.4);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .triplet-card::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: var(--primary);
+            filter: blur(80px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        .triplet-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+        .triplet-card:hover::before { opacity: 0.2; }
+        
+        .triplet-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 50%;
+            color: #8b5cf6;
+            position: relative;
+            z-index: 1;
+            box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+        .triplet-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            position: relative; z-index: 1;
+        }
+        .triplet-card p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            position: relative; z-index: 1;
+        }
+
+        .cta-section {
+            background: linear-gradient(rgba(3, 1, 8, 0.8), rgba(3, 1, 8, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 1200px !important;
+        }
+
+        .view-more-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; margin-top: 2rem; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-actions { justify-content: center; flex-wrap: wrap; }
+            .hero-visual img { width: 200px !important; margin: 0 auto; }
+            .portfolio-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-us-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            header { flex-direction: row; justify-content: space-between; align-items: center; padding: 1.5rem; position: relative; }
+            .hamburger-menu { display: block; position: absolute; right: 20px; top: 25px; z-index: 1001; }
+            .main-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(10, 5, 20, 0.98); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; z-index: 1000; text-align: center; gap: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
+            .main-nav.active { display: flex; animation: slideDown 0.3s ease forwards; }
+            .main-nav a { font-size: 1.2rem; padding: 1rem; width: 100%; }
+            @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+            /* Overrides móviles mejorados */
+            .hero-visual { display: none !important; }
+            h1, .hero-content h1 { font-size: 2.2rem !important; line-height: 1.3 !important; }
+            h2, .section-title { font-size: 1.8rem !important; line-height: 1.3 !important; }
+            .card-content h3 { font-size: 1.3rem !important; }
+            .triplet-card h3 { font-size: 1.4rem !important; }
+            .card { margin: 0; border-radius: 16px; }
+            .card-image-container { height: 200px; }
+            .portfolio-grid { gap: 1.5rem; padding: 0 0.5rem; }
+    
+            .hero-content h1 { font-size: 2.8rem; }
+            
+            
+            .triplet-container {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                padding-bottom: 2rem;
+            }
+            .triplet-card { 
+                width: 100%; 
+                padding: 2.5rem 1.5rem; 
+                border: 2px solid rgba(139, 92, 246, 0.3) !important;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+    
+            
+            .cta-section { padding: 3rem 1.5rem !important; margin: 4rem 1rem !important; }
+            .cta-section h2 { font-size: 2.2rem; }
+            .cta-section p { font-size: 1rem; }
+            
+            footer { flex-direction: column; text-align: center; gap: 1rem; padding: 2rem; }
+            .social-links { justify-content: center; }
+        }
+        /* WIDGET Y MODAL WHATSAPP */
+        .wa-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse-wa 2s infinite;
+        }
+        .wa-float-btn:hover { transform: scale(1.1); }
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .wa-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .wa-modal {
+            background: rgba(20, 10, 40, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .wa-modal.active { transform: translateY(0); }
+        .wa-modal-close {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: none; border: none;
+            color: #fff; font-size: 1.5rem;
+            cursor: pointer; opacity: 0.7;
+        }
+        .wa-modal-close:hover { opacity: 1; }
+        
+        .wa-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+        .wa-header svg { width: 40px; height: 40px; }
+        .wa-header h3 { font-size: 1.2rem; margin: 0; color: #fff; }
+        .wa-header p { font-size: 0.9rem; color: #25D366; margin: 0; }
+        
+        .wa-chat-bubble {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 15px;
+            border-bottom-left-radius: 5px;
+            margin-bottom: 1.5rem;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .wa-services { display: flex; flex-direction: column; gap: 10px; }
+        .wa-service-btn {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #fff; padding: 0.8rem 1rem;
+            border-radius: 10px; text-align: left;
+            cursor: pointer; transition: all 0.2s ease;
+            font-family: inherit; font-size: 0.9rem;
+        }
+        .wa-service-btn:hover { background: rgba(139, 92, 246, 0.3); transform: translateX(5px); }
+        
+        .wa-confirm { display: none; text-align: center; }
+        .wa-confirm p { color: #e2e8f0; margin-bottom: 1.5rem; font-size: 0.95rem;}
+        .wa-confirm-actions { display: flex; gap: 10px; justify-content: center; }
+        .wa-btn-accept { background: #25D366; color: #000; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .wa-btn-cancel { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; }
+    </style>
+
+</head>
+<body>
+
+    <!-- HEADER CON LOGO SVG Y NAVEGACIÓN -->
+    <header>
+        <div class="brand-logo">
+            <img src="logo.svg" alt="Zipper Media">
+        </div>
+        
+        <button class="hamburger-menu" onclick="toggleMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <nav class="main-nav" id="mainNav">
+            <a href="#home" onclick="toggleMenu()" >INICIO</a>
+            <a href="#nosotros"  onclick="toggleMenu();">NOSOTROS</a>
+            <a href="#proyectos"  onclick="toggleMenu();">PROYECTOS</a>
+            <a href="#" onclick="openWaModal(event); toggleMenu();" class="btn-nav">HABLEMOS</a>
+        </nav>
+    </header>
+
+    <!-- HERO PREMIUM -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Diseño y <br><span class="gradient-text">Desarrollo Web</span></h1>
+            <p style="font-size: 1.15rem; color: #94a3b8; line-height: 1.7;">En Zipper Media diseñamos y construimos ecosistemas digitales y tiendas online de alto rendimiento. Estética premium, velocidad excepcional y resultados reales.</p>
+            <div class="hero-actions">
+                <a href="#proyectos" class="btn-primary">Ver Portafolio</a>
+                <a href="#" onclick="openWaModal(event)" class="btn-secondary">Contactar</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="icon-container">
+                <img src="logo.svg" alt="Zipper Media" style="width: 350px; height: auto; position: relative; z-index: 1; filter: brightness(0) invert(1) drop-shadow(0 20px 30px rgba(0,0,0,0.6)); animation: float 6s ease-in-out infinite;">
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section id="nosotros" class="about-us-triplet">
+        <div style="text-align:center; margin-bottom: 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size:2.8rem; color:#fff;">Conoce a Zipper Media</h2>
+        </div>
+        <div class="triplet-container">
+            <!-- Misión -->
+            <div class="triplet-card">
+                <div class="triplet-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                </div>
+                <h3>Misión</h3>
+                <p>Potenciar el crecimiento de nuestros clientes mediante ecosistemas digitales innovadores, rápidos y escalables que generan resultados reales y medibles en internet.</p>
+            </div>
+            <!-- Visión -->
+            <div class="triplet-card">
+                <div class="triplet-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </div>
+                <h3>Visión</h3>
+                <p>Ser la agencia de referencia en desarrollo web premium, destacando por nuestra estética impecable, tecnología de punta y compromiso absoluto con la excelencia digital.</p>
+            </div>
+            <!-- Valores -->
+            <div class="triplet-card">
+                <div class="triplet-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3>Valores</h3>
+                <p>Innovación constante, transparencia absoluta, calidad sin compromisos y una pasión inquebrantable por transformar ideas en realidades digitales sobresalientes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID CON LOS 14 PROYECTOS FIJOS -->
+    <div style="text-align: center; margin-bottom: 3rem; margin-top: 6rem;">
+        <h2 style="font-family:'Poppins', sans-serif; font-size:2.8rem; color:#fff;">Últimos Proyectos</h2>
+    </div>
+    <section id="proyectos" class="portfolio-grid">
+
+        <!-- 1. Tol 2 Creativa -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://tol2creativa.com/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="tol2.jpg" alt="Tol 2 Creativa">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">Tol 2 Creativa</h3>
+                <p class="description">Portal corporativo para la empresa líder en infraestructura y producción de eventos masivos y conciertos internacionales.</p>
+                <div class="tags">
+                    <span class="tag">Laravel / PHP</span>
+                    <span class="tag">Arquitectura Web</span>
+                    <span class="tag">UI Corporativo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Galería Dendrológica -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://galeriadendrologica.com/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="dendrologica.jpg" alt="Galería Dendrológica">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">Galería Dendrológica</h3>
+                <p class="description">Catálogo botánico estructurado para la divulgación científica, organización taxonómica y registro fotográfico arbóreo.</p>
+                <div class="tags">
+                    <span class="tag">Base de Datos</span>
+                    <span class="tag">Taxonomía Digital</span>
+                    <span class="tag">Optimización Media</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Abogados en CDMX -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://abogadosencdmx.com/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="abogados.jpg" alt="Abogados en CDMX">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">Abogados en CDMX</h3>
+                <p class="description">Portal corporativo legal con más de 20 abogados especializados en 7 áreas jurídicas en Roma Norte, CDMX.</p>
+                <div class="tags">
+                    <span class="tag">WordPress</span>
+                    <span class="tag">Elementor Pro</span>
+                    <span class="tag">SEO Local</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Corredor Biológico A.S. -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://cobascr.com/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="cobas.jpg" alt="Corredor Biológico A.S.">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">Corredor Biológico A.S.</h3>
+                <p class="description">Plataforma interactiva para la conservación ambiental, mapeo de biodiversidad y apoyo a microemprendedores del Pacífico Sur.</p>
+                <div class="tags">
+                    <span class="tag">Mapas Interactivos</span>
+                    <span class="tag">WordPress</span>
+                    <span class="tag">Sostenibilidad</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. SYVA Private Culinary -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://syvacr.com/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="syva.jpg" alt="SYVA Private Culinary">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">SYVA Private Culinary</h3>
+                <p class="description">Portal web minimalista y sofisticado para la reserva de experiencias de alta cocina a domicilio y menús exclusivos.</p>
+                <div class="tags">
+                    <span class="tag">Diseño UI Premium</span>
+                    <span class="tag">Reservas Online</span>
+                    <span class="tag">CSS Avanzado</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Brum -->
+        <div class="card">
+            <div class="card-image-container">
+                <a href="https://brum.mx/" target="_blank" rel="noopener">
+                    <div class="mockup">
+                        <div class="mockup-header"><span></span><span></span><span></span></div>
+                        <div class="mockup-body">
+                            <img src="brum.jpg" alt="Brum">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-content">
+                <h3 class="title">Brum</h3>
+                <p class="description">Plataforma e-commerce masiva de mobiliario y decoración en México, con filtrado avanzado y alto rendimiento.</p>
+                <div class="tags">
+                    <span class="tag">WooCommerce</span>
+                    <span class="tag">WordPress</span>
+                    <span class="tag">PHP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN VER MÁS -->
+        <div class="view-more-container">
+            <a href="proyectos.html" class="btn-primary" style="display:inline-block; padding: 1.2rem 3.5rem; font-size: 1.2rem;">Ver Todos los Proyectos</a>
+        </div>
+
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section id="hablemos" class="cta-section">
+        <h2>¿Listo para darle vida a tu proyecto?</h2>
+        <p>Si tienes una idea en mente o necesitas mejorar tu página web actual, me encantaría escucharte. Escríbenos y platiquemos sobre cómo podemos ayudarte a lograr tus objetivos en internet.</p>
+        <a href="#" onclick="openWaModal(event)" class="btn-action-large">
+            Hablemos por WhatsApp
+        </a>
+    </section>
+
+    <!-- FOOTER CON LOGO SVG Y ENLACE DE WHATSAPP -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.svg" alt="Zipper Media">
+            </div>
+            <p class="copyright">&copy; 2026 Zipper Media. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <!-- WIDGET Y MODAL WHATSAPP -->
+    <div class="wa-float-btn" onclick="openWaModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </div>
+
+    <div class="wa-modal-overlay" id="waOverlay">
+        <div class="wa-modal" id="waModal">
+            <button class="wa-modal-close" onclick="closeWaModal()">×</button>
+            <div class="wa-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#25D366"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.523 0-10-4.477-10-10S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                <div>
+                    <h3>Zipper Media</h3>
+                    <p>En línea</p>
+                </div>
+            </div>
+            
+            <div id="waStep1">
+                <div class="wa-chat-bubble">
+                    ¡Hola! 👋<br>Soy parte del equipo de Zipper Media. ¿En qué servicio estás interesado?
+                </div>
+                <div class="wa-services">
+                    <button class="wa-service-btn" onclick="selectService('Diseño y Desarrollo Web')">🖥️ Diseño y Desarrollo Web</button>
+                    <button class="wa-service-btn" onclick="selectService('Tienda Online (E-commerce)')">🛒 Tienda Online (E-commerce)</button>
+                    <button class="wa-service-btn" onclick="selectService('Rediseño / Mantenimiento Web')">🔄 Rediseño / Mantenimiento Web</button>
+                    <button class="wa-service-btn" onclick="selectService('Sistemas y Plataformas a Medida')">⚙️ Sistemas a Medida</button>
+                    <button class="wa-service-btn" onclick="selectService('Asesoría Digital')">💡 Asesoría Digital</button>
+                </div>
+            </div>
+
+            <div id="waStep2" class="wa-confirm">
+                <div class="wa-chat-bubble">
+                    ¡Excelente elección! Te redirigiremos a WhatsApp para continuar la conversación sobre <strong id="waSelectedService"></strong>. ¿Estás listo?
+                </div>
+                <div class="wa-confirm-actions">
+                    <button class="wa-btn-accept" onclick="goToWhatsapp()">Sí, ir a WhatsApp</button>
+                    <button class="wa-btn-cancel" onclick="resetWaModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedServiceStr = '';
+        const waNumber = '50684466476';
+
+        function openWaModal(e) {
+            if(e) e.preventDefault();
+            const overlay = document.getElementById('waOverlay');
+            const modal = document.getElementById('waModal');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function closeWaModal() {
+            const overlay = document.getElementById('waOverlay');
+            const modal = document.getElementById('waModal');
+            overlay.style.opacity = '0';
+            modal.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                resetWaModal();
+            }, 300);
+        }
+
+        function selectService(service) {
+            selectedServiceStr = service;
+            document.getElementById('waSelectedService').innerText = service;
+            document.getElementById('waStep1').style.display = 'none';
+            document.getElementById('waStep2').style.display = 'block';
+        }
+
+        function resetWaModal() {
+            document.getElementById('waStep1').style.display = 'block';
+            document.getElementById('waStep2').style.display = 'none';
+        }
+
+        function goToWhatsapp() {
+            const text = encodeURIComponent('Hola Zipper Media, me interesa el servicio de ' + selectedServiceStr + '. Me gustaría recibir más información.');
+            const url = 'https://wa.me/' + waNumber + '?text=' + text;
+            window.open(url, '_blank');
+            closeWaModal();
+        }
+        
+        document.getElementById('waModal').addEventListener('click', function(e){
+            e.stopPropagation();
+        });
+        document.getElementById('waOverlay').addEventListener('click', closeWaModal);
+    </script>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            if(window.innerWidth <= 768) {
+                nav.classList.toggle('active');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
